@@ -34,14 +34,14 @@ function avatarDropDown() {
   }
   
   window.onclick = function(event) {
-    if (!event.target.matches('#avatar')) {
+    if (!event.target.matches('#avatar') && !(document.getElementById("avatarDropDown").contains(event.target))) {
       var dropdowns = document.getElementsByClassName("avatarDropDown-content");
       var i;
       for (i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
         if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
+            openDropdown.classList.remove('show');     
+        } 
       }
     }
   }
