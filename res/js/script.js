@@ -7,42 +7,59 @@ var user = {
   }
 */
 
-$.getJSON('https://private-anon-df6a060fae-wad20postit.apiary-mock.com/users/1', function(data) {
-        var avatar = `${data.avatar}`
-        var avatarEl = document.getElementById('avatar');
-        avatarEl.src = avatar;        
+    $.getJSON('https://private-anon-df6a060fae-wad20postit.apiary-mock.com/users/1', function (data) {
+        const avatar = `${data.avatar}`;
+        var avatarEl = document.getElementById("avatar");
+        avatarEl.src = avatar;
+        const userdata = `${data.firstname}
+                    ${data.lastname}<br>
+                    ${data.email}`;
+        $("#userdata").html(userdata);
     });
 
-$.getJSON('https://private-anon-df6a060fae-wad20postit.apiary-mock.com/users/1', function(data) {
-    var userdata = `${data.firstname}
-                    ${data.lastname}<br>
-                    ${data.email}`
-    var avatar = `${data.avatar}`
-    $("#userdata").html(userdata);
-    var avatarEl = document.getElementById('avatar');
-    avatarEl.src = avatar;        
+
+$.getJSON('http://private-anon-81fac79a64-wad20postit.apiary-mock.com/posts', function(data) {
+    for (let post of data) {
+        const postcontainer = $("<div class='post'></div>");
+        const author = $("<div class='post-author'></div>");
+        const authorinfo = $("<div class='post-author-info'></div>");
+        const authorimage = $("<img src="+post.author.avatar+"'' alt='Post Author'>");
+        authorinfo.append(authorimage);
+        authorinfo.append($("<small>"+post.author.firstname + ' ' + post.author.lastname + "</small>"));
+        author.append(authorinfo);
+        author.append($("<small>" + post.createTime + "</small>"));
+        postcontainer.append(author);
+        if (post.media !== null) {
+            if (post.media.type === "video") {
+                postcontainer.append($("<video controls><source src='"+post.media.url+"' type='video/mp4'></video>"))
+            } else if (post.media.type === "image") {
+                postcontainer.append($("<div class='post-image'><img src='"+post.media.url+"' alt='Post image'></div>"))
+            }
+        }
+        if (post.text !== null) {
+        postcontainer.append($("<div class='post-title'><h3>"+post.text+"</h3></div>"))
+        }
+        postcontainer.append($("<div class='post-actions'><button type='button' name='like' class='like-button'>"+post.likes+"</button></div>"));
+        $(".main-container").append(postcontainer)
+    }
 });
 
 function avatarDropDown() {
     document.getElementById("avatarDropDown").classList.toggle("show");
-    
-
-    //var userdata = document.getElementById('userdata');
-    //userdata.innerHTML = user.firstname + ' ' +user.lastname + '<br />' +
-    //user.email;
-    
-  }
+}
   
-  window.onclick = function(event) {
+window.onclick = function(event) {
     if (!event.target.matches('#avatar') && !(document.getElementById("avatarDropDown").contains(event.target))) {
-      var dropdowns = document.getElementsByClassName("avatarDropDown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');     
-        } 
-      }
+        const dropdowns = document.getElementsByClassName("avatarDropDown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+        if(event.target.name === "like") {
+            event.target.classList.toggle("liked");
+        }
     }
-  }
+};
 
