@@ -8,9 +8,8 @@ var user = {
 */
 $(document).ready(function() {
     $.getJSON('https://private-anon-df6a060fae-wad20postit.apiary-mock.com/users/1', function (data) {
-        const avatar = `${data.avatar}`;
-        var avatarEl = document.getElementById("avatar");
-        avatarEl.src = avatar;
+        let avatarEl = $("#avatar");
+        avatarEl.attr("src", data.avatar);
         const userdata = `${data.firstname}
                ${data.lastname}<br>
                ${data.email}`;
@@ -56,8 +55,8 @@ $(document).ready(function() {
                 const openDropdown = dropdowns[i];
                 $(openDropdown).hide();
             }
-            if (target.name === "like") {
-                target.classList.toggle("liked");
+            if (event.target.name === "like") {
+                event.target.classList.toggle("liked");
             }
 
             if (event.target.name === "follow") {
@@ -86,3 +85,4 @@ $(document).ready(function() {
 
     });
 });
+
