@@ -284,7 +284,7 @@ nav div#avatar-container {
 
 .follow-button {
     background-color: purple;
-    width: 70px;
+    width: auto;
     height: 35px;
     line-height: 10px;
     text-align: center;
