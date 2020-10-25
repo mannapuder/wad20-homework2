@@ -7,15 +7,15 @@ var user = {
   }
 */
 
-    $.getJSON('https://private-anon-df6a060fae-wad20postit.apiary-mock.com/users/1', function (data) {
-        const avatar = `${data.avatar}`;
-        var avatarEl = document.getElementById("avatar");
-        avatarEl.src = avatar;
-        const userdata = `${data.firstname}
-                    ${data.lastname}<br>
-                    ${data.email}`;
-        $("#userdata").html(userdata);
-    });
+$.getJSON('https://private-anon-df6a060fae-wad20postit.apiary-mock.com/users/1', function (data) {
+    const avatar = `${data.avatar}`;
+    var avatarEl = document.getElementById("avatar");
+    avatarEl.src = avatar;
+    const userdata = `${data.firstname}
+               ${data.lastname}<br>
+               ${data.email}`;
+    $("#userdata").html(userdata);
+});
 
 
 $.getJSON('http://private-anon-81fac79a64-wad20postit.apiary-mock.com/posts', function(data) {
@@ -60,6 +60,26 @@ window.onclick = function(event) {
         if(event.target.name === "like") {
             event.target.classList.toggle("liked");
         }
+
+        if(event.target.name === "follow") {
+            event.target.classList.toggle("followed");
+
+        }
     }
 };
+
+$.getJSON('https://private-anon-cebd089c68-wad20postit.apiary-mock.com/profiles', function (data) {
+
+    for (let profile of data) {
+        const postcontainer = $("<div class='profile'></div>");
+        const profileinfo = $("<div class='profile-name'></div>");
+        const profileavatar = $("<img src="+profile.avatar+"'' alt='Post Author'>");
+        postcontainer.append(profileavatar);
+        profileinfo.append($("<h3>"+profile.firstname + ' ' + profile.lastname+"</h3>"));
+        postcontainer.append(profileinfo);
+        postcontainer.append($("<div class='profile-button'><button type='button' name='follow' class='follow-button'>Follow</button></div>"));
+        $('.main-browse-container').append(postcontainer);
+    }
+
+});
 

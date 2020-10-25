@@ -216,20 +216,82 @@ nav div#avatar-container {
     background-color: #f1f1f1;
     min-width: 160px;
     min-height:160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
     right: 5px;
   }
   
   /* Links inside the dropdown */
   .avatarDropDown-content a {
-    padding: 4px 0px 4px;
+    padding: 4px 0 4px;
     display: inline;
   }
 
   .avatarDropDown-content p {
-    top: 0px;
+    top: 0;
     display: block;
   }
 
   .show {display:block;}
+
+  /* browse page styling */
+
+.main-browse-container {
+    width: 50%;
+    min-height: 200%;
+    margin: auto auto;
+    padding: 90px 15px 15px 15px;
+    background-color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+
+.profile {
+    width: 48%;
+    margin: 5px;
+    border: solid lightgray 1px;
+    border-radius: 5px;
+}
+
+.profile .post-author {
+    padding: 10px;
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: top;
+    margin: 5px auto;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.profile .profile-name h3 {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-button {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.follow-button {
+    background-color: purple;
+    width: 70px;
+    height: 35px;
+    line-height: 10px;
+    text-align: center;
+}
+
+.follow-button.followed{
+    background-color: white;
+    color: purple;
+    border: solid 1px purple;
+}
